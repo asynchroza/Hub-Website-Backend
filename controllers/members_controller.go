@@ -11,7 +11,6 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -34,7 +33,6 @@ func CreateMember(c *fiber.Ctx) error {
 	}
 
 	newMember := models.Member{
-		Id:         primitive.NewObjectID(),
 		Firstname:  member.Firstname,
 		Lastname:   member.Lastname,
 		Department: member.Department,
