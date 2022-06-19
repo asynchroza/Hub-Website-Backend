@@ -2,7 +2,6 @@ package configs
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -14,14 +13,14 @@ func ConnectDB() *mongo.Client {
 	client, err := mongo.NewClient(options.Client().ApplyURI(EnvMongoURI()))
 
 	if err != nil {
-		log.Fatalf("Can't connect to DB")
+		log.Fatal("Can't connect to DB")
 	}
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	err = client.Connect(ctx)
 
 	if err != nil {
-		log.Fatalf("Context timeout")
+		log.Fatal("Context timeout")
 	}
 
 	err = client.Ping(ctx, nil)
@@ -29,7 +28,6 @@ func ConnectDB() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Connected to DB")
 	return client
 }
 
