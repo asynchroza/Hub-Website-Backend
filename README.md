@@ -1,5 +1,5 @@
 <h3>Backend for @TheHubAUBG's SPA</h3>
-<p>Go, MongoDB</p>
+<p><em>Go, MongoDB</em></p>
 <a href="https://github.com/asynchroza/Hub-Website-Backend/blob/main/go.mod"> Dependencies </a>
 <hr/>
 <p><strong>Information and resources: </strong></p>
