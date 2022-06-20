@@ -37,15 +37,13 @@ func LoginAdmin(c *fiber.Ctx) error {
 		fmt.Println(fiber.StatusOK)
 	}
 
-	p, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	// p, err := bcrypt.GenerateFromPassword([]byte(incomming_admin.Password), 10)
+	// if err != nil {
+	// 	log.Fatal(err.Error())
+	// }
 
-	if err := bcrypt.CompareHashAndPassword(p, []byte(incomming_admin.Password)); err != nil {
-		return c.JSON(fiber.Map{
-			"Message": err.Error(),
-		})
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(incomming_admin.Password)); err != nil {
+		log.Fatalf(err.Error())
 	}
 
 	return c.JSON(user)
