@@ -15,3 +15,12 @@ func EnvMongoURI() string {
 
 	return os.Getenv("MONGOURI")
 }
+
+func ReturnAuthToken() string {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	return os.Getenv("AUTH_TOKEN")
+}
