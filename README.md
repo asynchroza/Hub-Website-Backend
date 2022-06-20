@@ -23,5 +23,5 @@
 <p><strong>Articles (used for managing displayed articles): </p></strong>
 <p> TBA </p>
 <hr/>
-<p><strong>Jobs (used for managin displayed job opportunities): </p></strong>
+<p><strong>Jobs (used for managing displayed job opportunities): </p></strong>
 <p> TBA </p>
