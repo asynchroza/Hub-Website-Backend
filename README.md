@@ -6,8 +6,9 @@
 <h3>Project structure:</h3>
 <p><strong>Admins (used for authorization): </p></strong>
 <p>Requests: </p> 
-<li> Post request on /api/login - accepts username and password as body, and returns bearer token on success </li>
+<li> Post request on /api/login (login) - accepts username and password as body, and returns bearer token on success </li>
 <hr/>
 <p><strong>Members: (used for managing club members)</p></strong>
 <p>Requests:</p>
-<li> Post request on /api/member - accepts bearer token as a header, <br/> firstname, lastname, department, position, sociallink, profilepicture as body </li>
+<li> Post request on /api/member (create member) - accepts bearer token as a header, <br/> firstname, lastname, department, position, sociallink, profilepicture as body </li>
+<li> Get request on /api/members (get all members) - accepts bearer token as a header </li>
