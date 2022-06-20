@@ -7,6 +7,7 @@
 <p><strong>Admins (used for authorization): </p></strong>
 <p>Requests: </p> 
 <li> Post request on /api/login - accepts username and password as body, and returns bearer token on success </li>
+<hr/>
 <p><strong>Members: (used for managing club members)</p></strong>
 <p>Requests:</p>
 <li> Post request on /api/member - accepts bearer token as a header, <br/> firstname, lastname, department, position, sociallink, profilepicture as body </li>
