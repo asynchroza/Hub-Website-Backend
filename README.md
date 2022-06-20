@@ -1,6 +1,7 @@
-# Hub-Website-Backend
-
-deps:
-go get go.mongodb.org/mongo-driver/mongo
-go get github.com/joho/godotenv
-go get github.com/go-playground/validator/v10
+<h3>Backend for @TheHubAUBG's SPA</h3>
+<hr/>
+<p><strong>Information and resources: </strong></p>
+<p><a href="https://github.com/asynchroza/Hub-Website-Backend/blob/main/tasks.txt">Timeline of added features</a></p>
+<hr/>
+<p><strong>Project structure </strong></p>
+<li>Admins</li>
