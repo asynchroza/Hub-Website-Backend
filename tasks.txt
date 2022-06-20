@@ -1,4 +1,4 @@
 JUNE 20th: 
 - Added password validation which returns (on 200) an env AUTH_TOKEN for validating requests
-- Changed CreateMember to accept a header for the BEARER_TOKEN (AUTH_TOKEN)
+- Changed CreateMember (POST req) to accept a header for the BEARER_TOKEN (AUTH_TOKEN)
 - Changed Member model to accept a profile picture http link (as a string)
