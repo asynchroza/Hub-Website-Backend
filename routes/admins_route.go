@@ -8,5 +8,5 @@ import (
 
 func AdminRoute(app *fiber.App) {
 	// validate Admin
-	app.Post("/api/admin", controllers.GetAdmin)
+	app.Post("/api/login", controllers.LoginAdmin)
 }
