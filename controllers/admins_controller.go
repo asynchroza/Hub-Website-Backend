@@ -27,9 +27,9 @@ func LoginAdmin(c *fiber.Ctx) error {
 	var user models.Admin
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err := adminCollection.FindOne(ctx, bson.M{"user": incomming_admin.Username}).Decode(&user)
+	err := adminCollection.FindOne(ctx, bson.M{"username": incomming_admin.Username}).Decode(&user)
 
-	// fmt.Println(user)
+	fmt.Println(user)
 
 	if err != nil {
 		fmt.Println(fiber.StatusBadRequest)
@@ -37,15 +37,12 @@ func LoginAdmin(c *fiber.Ctx) error {
 		fmt.Println(fiber.StatusOK)
 	}
 
-	p, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	p, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	fmt.Println(string(p))
-
 	if err := bcrypt.CompareHashAndPassword(p, []byte(incomming_admin.Password)); err != nil {
-		fmt.Println(incomming_admin.Password)
 		return c.JSON(fiber.Map{
 			"Message": err.Error(),
 		})
