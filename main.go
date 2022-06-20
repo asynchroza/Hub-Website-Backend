@@ -14,5 +14,6 @@ func main() {
 	app := fiber.New()
 	configs.ConnectDB()
 	routes.MembersRoute(app)
+	routes.AdminRoute(app)
 	log.Fatal(app.Listen(":8000"))
 }
