@@ -20,6 +20,12 @@ var validate = validator.New()
 
 func CreateMember(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+	bearer_token := c.Get("BEARER_TOKEN")
+	if bearer_token != configs.ReturnAuthToken() {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
+	}
+
 	var member models.Member
 	defer cancel()
 
@@ -33,12 +39,15 @@ func CreateMember(c *fiber.Ctx) error {
 	}
 
 	newMember := models.Member{
-		Firstname:  member.Firstname,
-		Lastname:   member.Lastname,
-		Department: member.Department,
-		Position:   member.Position,
-		LinkedIn:   member.LinkedIn,
+		Firstname:      member.Firstname,
+		Lastname:       member.Lastname,
+		Department:     member.Department,
+		Position:       member.Position,
+		SocialLink:     member.SocialLink,
+		ProfilePicture: member.ProfilePicture,
 	}
+
+	// fmt.Println(newMember.ProfilePicture)
 
 	result, err := membersCollection.InsertOne(ctx, newMember)
 	if err != nil {

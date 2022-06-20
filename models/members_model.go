@@ -1,9 +1,10 @@
 package models
 
 type Member struct {
-	Firstname  string `json:"first_name, omitempty" validate:"required"`
-	Lastname   string `json:"last_name, omitempty" validate:"required"`
-	Department string `json:"department, omitempty" validate:"required"`
-	Position   string `json:"job_position, omitempty" validate:"required"`
-	LinkedIn   string `json:"social_link, omitempty" validate:"required"`
+	Firstname      string `json:"firstname, omitempty" validate:"required"`
+	Lastname       string `json:"lastname, omitempty" validate:"required"`
+	Department     string `json:"department, omitempty" validate:"required"`
+	Position       string `json:"position, omitempty" validate:"required"`
+	SocialLink     string `json:"sociallink, omitempty" validate:"required"`
+	ProfilePicture string `json:"profilepicture, omitempty" validate:"required"`
 }
