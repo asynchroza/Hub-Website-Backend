@@ -10,4 +10,5 @@ func MembersRoute(app *fiber.App) {
 	// club members requests routes
 	app.Post("/api/member", controllers.CreateMember)
 	app.Get("/api/members", controllers.GetAllMembers)
+	app.Get("/api/member/:key", controllers.GetMember)
 }

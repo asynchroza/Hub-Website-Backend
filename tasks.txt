@@ -7,5 +7,9 @@ JUNE 21th 2022:
 - Added POST req in Admin route for BEARER_TOKEN verification (to be used as a validator for entering a routed page where verification is needed)
 
 June 22th 2022 (TBA):
-- Implement all Member requests
-- Start working on Events
+- Added MemberID (string) to member model (to be used for easy retrieval of member) (stored as memberid in DB)
+- Added GetMember (GET request) which accepts member_id as "key" (string) (/api/member/$key) -> does not work with ?key=, returns user_info as "data"
+
+
+* Implement all Member requests
+* Start working on Events
