@@ -4,7 +4,7 @@ JUNE 20th 2022:
 - Changed Member model to accept a profile picture http link (as a string)
 
 JUNE 21th 2022 (TBA):
-- Added POST req in Admin route for BEARER_TOKEN verification (to be used as a validator for entering a pace where verification is needed)
+- Added POST req in Admin route for BEARER_TOKEN verification (to be used as a validator for entering a routed page where verification is needed)
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 - Implement all Member requests
 - Start working on Events
