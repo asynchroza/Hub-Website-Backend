@@ -1,5 +1,4 @@
 <h3>Backend for @TheHubAUBG's SPA</h3>
-<p><em>Go, MongoDB</em></p>
 <a href="https://github.com/asynchroza/Hub-Website-Backend/blob/main/go.mod"> Dependencies </a>
 <hr/>
 <p><strong>Information and resources: </strong></p>
@@ -9,6 +8,7 @@
 <p><strong>Admins (used for authorization): </p></strong>
 <p>Requests: </p> 
 <li> Post request on /api/login (login) - accepts username and password as body, and returns bearer token on success </li>
+<li> Post request on /api/validate (BEARER_TOKEN validation) - accepts header with BEARER_TOKEN </li>
 <hr/>
 <p><strong>Members (used for managing club members):</p></strong>
 <p>Requests:</p>
