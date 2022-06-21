@@ -1,4 +1,10 @@
-JUNE 20th: 
+JUNE 20th 2022: 
 - Added password validation which returns (on 200) an env AUTH_TOKEN for validating requests
 - Changed CreateMember (POST req) to accept a header for the BEARER_TOKEN (AUTH_TOKEN)
 - Changed Member model to accept a profile picture http link (as a string)
+
+JUNE 21th 2022 (TBA):
+- Added POST req in Admin route for BEARER_TOKEN verification (to be used as a validator for entering a pace where verification is needed)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+- Implement all Member requests
+- Start working on Events

@@ -47,3 +47,13 @@ func LoginAdmin(c *fiber.Ctx) error {
 		responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"auth_token": auth_token}},
 	)
 }
+
+func ValidateAuth(c *fiber.Ctx) error {
+	bearer_token := c.Get("BEARER_TOKEN")
+	if bearer_token != configs.ReturnAuthToken() {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
+	}
+
+	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "Authentication success", Data: &fiber.Map{"User persmission": true}})
+
+}
