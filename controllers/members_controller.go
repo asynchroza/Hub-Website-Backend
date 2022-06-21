@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"context"
-	"fmt"
 	"hub-backend/configs"
 	"hub-backend/models"
 	"hub-backend/responses"
@@ -87,16 +86,13 @@ func GetAllMembers(c *fiber.Ctx) error {
 
 func GetMember(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	member_key := c.Params("key", "none")
-	// if err != nil {
-	// 	return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": err.Error()}})
-	// }
-	fmt.Println(member_key)
+	member_key := c.Params("key", "key was not provided")
+
 	var member models.Member
 	defer cancel()
 	err := membersCollection.FindOne(ctx, bson.M{"memberid": member_key}).Decode(&member)
 	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error() + "key: " + member_key}})
 	}
 
 	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": member}})
