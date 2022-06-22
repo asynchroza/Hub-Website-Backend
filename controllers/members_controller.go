@@ -103,6 +103,12 @@ func EditMember(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	member_key := c.Params("key", "key was not provided")
 	var member models.EditMember
+
+	bearer_token := c.Get("BEARER_TOKEN")
+	if bearer_token != configs.ReturnAuthToken() {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
+	}
+
 	defer cancel()
 
 	if err := c.BodyParser(&member); err != nil {
