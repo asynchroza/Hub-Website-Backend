@@ -12,4 +12,5 @@ func MembersRoute(app *fiber.App) {
 	app.Get("/api/members", controllers.GetAllMembers)
 	app.Get("/api/member/:key", controllers.GetMember)
 	app.Put("/api/member/:key", controllers.EditMember)
+	app.Delete("/api/member/:key", controllers.DeleteMember)
 }

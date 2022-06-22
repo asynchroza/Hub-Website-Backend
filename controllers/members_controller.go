@@ -23,12 +23,12 @@ func CreateMember(c *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	bearer_token := c.Get("BEARER_TOKEN")
-	if bearer_token != configs.ReturnAuthToken() {
-		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
-	}
 
 	var member models.Member
 	defer cancel()
+	if bearer_token != configs.ReturnAuthToken() {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
+	}
 
 	// validate request body
 	if err := c.BodyParser(&member); err != nil {
@@ -105,11 +105,11 @@ func EditMember(c *fiber.Ctx) error {
 	var member models.EditMember
 
 	bearer_token := c.Get("BEARER_TOKEN")
+
+	defer cancel()
 	if bearer_token != configs.ReturnAuthToken() {
 		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
 	}
-
-	defer cancel()
 
 	if err := c.BodyParser(&member); err != nil {
 		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "Empty Body"})
@@ -164,4 +164,30 @@ func EditMember(c *fiber.Ctx) error {
 	}
 
 	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "User was updated"})
+}
+
+func DeleteMember(c *fiber.Ctx) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	member_key := c.Params("key", "key was not provided")
+	bearer_token := c.Get("BEARER_TOKEN")
+	defer cancel()
+
+	if bearer_token != configs.ReturnAuthToken() {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
+	}
+
+	result, err := membersCollection.DeleteOne(ctx, bson.M{"memberid": member_key})
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"Reason": err.Error(), "Key": member_key}})
+	}
+
+	if result.DeletedCount < 1 {
+		return c.Status(http.StatusNotFound).JSON(
+			responses.MemberResponse{Status: http.StatusNotFound, Message: "error", Data: &fiber.Map{"data": "User with specified ID not found!"}},
+		)
+	}
+
+	return c.Status(http.StatusOK).JSON(
+		responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": "User successfully deleted!"}},
+	)
 }
