@@ -17,7 +17,8 @@
 <li> Get request on /api/member/:key (get single member) - accepts parameter key (memberid)</li>
 <li> Put request on /api/member/:key (change info of member) - accepts parameter key (memberid), normal Member model body and bearer token as a header</li>
 <li> Delete request on /api/member (delete member) - accepts parameter key (memberid) and bearer token as a header</li>
-<p><em>GET requests are not subject to authorization</em></p>
+<br>
+<p><em><strong>NB:</strong> GET requests are not subject to authorization</em></p>
 <hr/>
 <p><strong>Events (used for managing displayed events): </p></strong>
 <p> TBA </p>
