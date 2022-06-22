@@ -10,5 +10,6 @@ June 22th 2022:
 - Added MemberID (string) to member model (to be used for easy retrieval of member) (stored as memberid in DB)
 - Added GetMember (GET request) which accepts member_id as "key" (string) (/api/member/$key) -> does not work with ?key=, returns user_info as "data"
 - Added EditMember (PUT request, hence when provided with new information it edits the member's fields) which accepts normal member body, BEARER_TOKEN at /api/member/$key 
+- Added DeleteMember (DELETE request) which acts pretty much the same as GET member except it deletes the member and needs BEARER_TOKEN authorization
 
 * Start working on Events

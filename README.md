@@ -13,10 +13,10 @@
 <p><strong>Members (used for managing club members):</p></strong>
 <p>Requests:</p>
 <li> Post request on /api/member (create member) - accepts bearer token as a header, <br/> firstname, lastname, department, position, sociallink, profilepicture as body </li>
-<li> Get request on /api/members (get all members) - accepts bearer token as a header (might remove the validation for get requests) </li>
-<li> Get request on /api/member (get single member) - TBA </li>
-<li> Put request on /api/member (change info of member) - TBA </li>
-<li> Delete request on /api/member (delete member) - TBA </li>
+<li> Get request on /api/members (get all members) - empty request, returns all members as body in "data" json array </li>
+<li> Get request on /api/member/:key (get single member) - accepts parameter key (memberid)</li>
+<li> Put request on /api/member/:key (change info of member) - accepts parameter key (memberid), normal Member model body and bearer token as a header</li>
+<li> Delete request on /api/member (delete member) - accepts parameter key (memberid) and bearer token as a header</li>
 <hr/>
 <p><strong>Events (used for managing displayed events): </p></strong>
 <p> TBA </p>
