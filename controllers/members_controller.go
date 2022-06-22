@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"context"
+	"fmt"
 	"hub-backend/configs"
 	"hub-backend/models"
 	"hub-backend/responses"
@@ -96,4 +97,65 @@ func GetMember(c *fiber.Ctx) error {
 	}
 
 	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": member}})
+}
+
+func EditMember(c *fiber.Ctx) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	member_key := c.Params("key", "key was not provided")
+	var member models.EditMember
+	defer cancel()
+
+	if err := c.BodyParser(&member); err != nil {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "Empty Body"})
+	}
+
+	if validationErr := validate.Struct(&member); validationErr != nil {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "Body is not compatible"})
+	}
+
+	member_map := make(map[string]string)
+
+	// the commented code stops admins from modifying member id key
+	// if member.MemberID != "" {
+	// 	member_map["memberid"] = member.MemberID
+	// }
+
+	// excuse me for this :)))
+	if member.Firstname != "" {
+		member_map["firstname"] = member.Firstname
+	}
+	if member.Lastname != "" {
+		member_map["lastname"] = member.Lastname
+	}
+	if member.Department != "" {
+		member_map["department"] = member.Department
+	}
+	if member.Position != "" {
+		member_map["position"] = member.Position
+	}
+	if member.SocialLink != "" {
+		member_map["sociallink"] = member.SocialLink
+	}
+	if member.ProfilePicture != "" {
+		member_map["profilepicture"] = member.ProfilePicture
+	}
+
+	update := bson.M{}
+	for k, v := range member_map {
+		update[k] = v
+	}
+
+	fmt.Println(update)
+
+	result, err := membersCollection.UpdateOne(ctx, bson.M{"memberid": member_key}, bson.M{"$set": update})
+
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: err.Error()})
+	}
+
+	if result.MatchedCount != 1 {
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "Error while updating"})
+	}
+
+	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "User was updated"})
 }

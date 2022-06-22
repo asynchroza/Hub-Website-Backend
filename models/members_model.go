@@ -9,3 +9,13 @@ type Member struct {
 	SocialLink     string `json:"sociallink, omitempty" validate:"required"`
 	ProfilePicture string `json:"profilepicture, omitempty" validate:"required"`
 }
+
+type EditMember struct {
+	MemberID       string `json:"memberid"`
+	Firstname      string `json:"firstname"`
+	Lastname       string `json:"lastname"`
+	Department     string `json:"department"`
+	Position       string `json:"position"`
+	SocialLink     string `json:"sociallink"`
+	ProfilePicture string `json:"profilepicture"`
+}
