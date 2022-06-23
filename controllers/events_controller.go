@@ -69,3 +69,29 @@ func GetEvent(c *fiber.Ctx) error {
 	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": event}})
 
 }
+
+func GetAllEvents(c *fiber.Ctx) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	var events []models.Event
+	defer cancel()
+
+	results, err := eventsCollection.Find(ctx, bson.M{})
+
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+	}
+
+	defer results.Close(ctx)
+	for results.Next(ctx) {
+		var event models.Event
+		if err = results.Decode(&event); err != nil {
+			return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+		}
+
+		events = append(events, event)
+	}
+
+	return c.Status(http.StatusOK).JSON(
+		responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"events": events}},
+	)
+}
