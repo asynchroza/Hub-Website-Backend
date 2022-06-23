@@ -13,10 +13,10 @@
 <hr/>
 <p><strong>Members (used for managing club members):</p></strong>
 <p>Requests:</p>
-<li> Post request on /api/member (create member) - accepts bearer token as a header, <br/> firstname, lastname, department, position, sociallink, profilepicture as body </li>
-<li> Get request on /api/members (get all members) - empty request, returns all members as body in "data" json array </li>
-<li> Get request on /api/member/:key (get single member) - accepts parameter key (memberid)</li>
-<li> Put request on /api/member/:key (change info of member) - accepts parameter key (memberid), normal Member model body and bearer token as a header</li>
+<li> Post request on /api/member (create member) - accepts bearer token as a header, member body as form data </li>
+<li> Get request on /api/members (get all members) - empty request, returns all members </li>
+<li> Get request on /api/member/:key (get single member) - accepts parameter key (memberid) (pass as /api/member/1 not /api/member/?key=1)</li>
+<li> Put request on /api/member/:key (change info of member) - accepts parameter key (memberid), event body as form data and bearer token as a header</li>
 <li> Delete request on /api/member/:key (delete member) - accepts parameter key (memberid) and bearer token as a header</li>
 <br>
 <p><em><strong>NB:</strong> GET requests are not subject to authorization</em></p>
