@@ -15,4 +15,4 @@ June 22th 2022:
 June 23th 2022:
 - Implemented Events model
 - Added POST req for creating an Event (eventid, title, startdate (ISO), enddate (ISO), description, location, locationlink, banner) - needs authorization -> comments in events_models
-
+- Added GET req for getting an Event by its eventid which is passed as /api/member/:key (e.g. /api/member/1)
