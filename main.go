@@ -15,5 +15,6 @@ func main() {
 	configs.ConnectDB()
 	routes.MembersRoute(app)
 	routes.AdminRoute(app)
+	routes.EventsRoute(app)
 	log.Fatal(app.Listen(":8000"))
 }
