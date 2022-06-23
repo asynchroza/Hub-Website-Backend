@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -45,11 +46,26 @@ func CreateEvent(c *fiber.Ctx) error {
 		Banner:       event.Banner,
 	}
 
-	result, err := membersCollection.InsertOne(ctx, newEvent)
+	result, err := eventsCollection.InsertOne(ctx, newEvent)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	return c.Status(http.StatusCreated).JSON(responses.MemberResponse{Status: http.StatusCreated, Message: "success", Data: &fiber.Map{"data": result}})
+}
+
+func GetEvent(c *fiber.Ctx) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	event_key := c.Params("key", "key was not provided") // change default key
+
+	var event models.Event
+	defer cancel()
+
+	err := eventsCollection.FindOne(ctx, bson.M{"eventid": event_key}).Decode(&event)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error() + "key: " + event_key}})
+	}
+
+	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"data": event}})
 
 }

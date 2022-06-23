@@ -7,5 +7,6 @@ import (
 )
 
 func EventsRoute(app *fiber.App) {
-	app.Put("/api/event", controllers.CreateEvent)
+	app.Post("/api/event", controllers.CreateEvent)
+	app.Get("/api/event/:key", controllers.GetEvent)
 }
