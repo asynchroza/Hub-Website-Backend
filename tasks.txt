@@ -13,4 +13,6 @@ June 22th 2022:
 - Added DeleteMember (DELETE request) which acts pretty much the same as GET member except it deletes the member and needs BEARER_TOKEN authorization
 
 June 23th 2022:
-- Implement Events model
+- Implemented Events model
+- Added POST req for creating an Event (eventid, title, startdate (ISO), enddate (ISO), description, location, locationlink, banner) - needs authorization -> comments in events_models
+

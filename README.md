@@ -5,6 +5,7 @@
 <p><a href="https://github.com/asynchroza/Hub-Website-Backend/blob/main/tasks.txt">Timeline of added features</a></p>
 <hr/>
 <h3>Endpoint structure:</h3>
+<p><strong>NB:</strong> bearer_token is not passed in Authorization header but in a custom one</p>
 <p><strong>Admins (used for authorization): </p></strong>
 <p>Requests: </p> 
 <li> Post request on /api/login (login) - accepts username and password as body, and returns bearer token on success </li>
@@ -21,7 +22,7 @@
 <p><em><strong>NB:</strong> GET requests are not subject to authorization</em></p>
 <hr/>
 <p><strong>Events (used for managing displayed events): </p></strong>
-<p> TBA </p>
+<p> Post request on /api/event (create event) - accepts bearer token as a header and event body as form data</p>
 <hr/>
 <p><strong>Articles (used for managing displayed articles): </p></strong>
 <p> TBA </p>
