@@ -5,7 +5,7 @@
 <p><a href="https://github.com/asynchroza/Hub-Website-Backend/blob/main/tasks.txt">Timeline of added features</a></p>
 <hr/>
 <h3>Endpoint structure:</h3>
-<p><strong>NB:</strong> bearer_token is not passed in Authorization header but in a custom one</p>
+<p><strong>NB:</strong> bearer_token is not passed in Authorization header but in a custom basic one - "BEARER_TOKEN" </p>
 <p><strong>Admins (used for authorization): </p></strong>
 <p>Requests: </p> 
 <li> Post request on /api/login (login) - accepts username and password as body, and returns bearer token on success </li>
