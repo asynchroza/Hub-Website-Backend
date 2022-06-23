@@ -160,7 +160,7 @@ func EditMember(c *fiber.Ctx) error {
 	}
 
 	if result.MatchedCount != 1 {
-		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "Error while updating"})
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "Document not found"})
 	}
 
 	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "User was updated"})

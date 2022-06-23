@@ -19,3 +19,5 @@ June 23th 2022:
 
 June 24th 2022:
 - Added GET req for getting all Events from the db (on /api/events), no additional parameters needed
+- Added functionality for checking for empty fields in the body of the Events POST request and return an error if there are
+- Added PUT req (EDIT EVENT) on /api/events/:key (same methodology as members' PUT req)

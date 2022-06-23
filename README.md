@@ -22,6 +22,7 @@
 <p><em><strong>NB:</strong> GET requests are not subject to authorization</em></p>
 <hr/>
 <p><strong>Events (used for managing displayed events): </p></strong>
+<p><em><a href="http://www.timestamp-converter.com/">Use this website to convert dates to ISO format</a></em></p>
 <p> Post request on /api/event (create event) - accepts bearer token as a header and event body as form data</p>
 <hr/>
 <p><strong>Articles (used for managing displayed articles): </p></strong>
