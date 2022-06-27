@@ -56,10 +56,13 @@ func CreateEvent(c *fiber.Ctx) error {
 		Location:     event.Location,
 		LocationLink: event.LocationLink,
 		Banner:       event.Banner,
+		Data:         event.Data,
 	}
 
 	empty_body_check := EmptyStringBody(newEvent.EventID)
 
+	// this could be avoided with requiring validation in the model
+	// hence the creation of two models, one for the editing (similarly to the members model)
 	if empty_body_check {
 		return isEmptyException(c, "eventid")
 	}
@@ -87,6 +90,11 @@ func CreateEvent(c *fiber.Ctx) error {
 	empty_body_check = EmptyStringBody(newEvent.Banner)
 	if empty_body_check {
 		return isEmptyException(c, "banner")
+	}
+
+	empty_body_check = EmptyStringBody(newEvent.Data)
+	if empty_body_check {
+		return isEmptyException(c, "data")
 	}
 
 	if newEvent.StartDate.IsZero() || newEvent.EndDate.IsZero() {
@@ -188,6 +196,10 @@ func EditEvent(c *fiber.Ctx) error {
 
 	if !event.EndDate.IsZero() {
 		event_map["enddate"] = event.EndDate
+	}
+
+	if event.Data != "" {
+		event_map["data"] = event.Data
 	}
 
 	update := bson.M{}

@@ -11,4 +11,5 @@ type Event struct {
 	Location     string    `json:"location"`     // location in text
 	LocationLink string    `json:"locationlink"` // location google maps link
 	Banner       string    `json:"banner"`       // banner image google drive link
+	Data         string    `json:"data"`
 }

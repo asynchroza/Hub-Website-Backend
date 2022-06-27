@@ -28,3 +28,5 @@ June 25th 2022:
 June 27th 2022:
 - Removed required validation for Member.SocialLink (json)
 - Added Delete request for Events
+- Added Data field which stores html string (events)
+- Added sample example_event.html
