@@ -6,7 +6,7 @@ type Member struct {
 	Lastname       string `json:"lastname, omitempty" validate:"required"`
 	Department     string `json:"department, omitempty" validate:"required"`
 	Position       string `json:"position, omitempty" validate:"required"`
-	SocialLink     string `json:"sociallink, omitempty" validate:"required"`
+	SocialLink     string `json:"sociallink, omitempty"`
 	ProfilePicture string `json:"profilepicture, omitempty" validate:"required"`
 }
 

@@ -210,3 +210,30 @@ func EditEvent(c *fiber.Ctx) error {
 	return c.Status(http.StatusOK).JSON(responses.MemberResponse{Status: http.StatusOK, Message: "Event was updated"})
 
 }
+
+func DeleteEvent(c *fiber.Ctx) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	event_key := c.Params("key", "key was not provided")
+	bearer_token := c.Get("BEARER_TOKEN")
+	defer cancel()
+
+	if bearer_token != configs.ReturnAuthToken() {
+		return c.Status(http.StatusBadRequest).JSON(responses.MemberResponse{Status: http.StatusBadRequest, Message: "error", Data: &fiber.Map{"Reason": "Authentication failed"}})
+	}
+
+	result, err := eventsCollection.DeleteOne(ctx, bson.M{"eventid": event_key})
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(responses.MemberResponse{Status: http.StatusInternalServerError, Message: "Error", Data: &fiber.Map{"Reason": err.Error(), "Key": event_key}})
+	}
+
+	if result.DeletedCount < 1 {
+		return c.Status(http.StatusNotFound).JSON(
+			responses.MemberResponse{Status: http.StatusNotFound, Message: "No such event"},
+		)
+	}
+
+	return c.Status(http.StatusOK).JSON(
+		responses.MemberResponse{Status: http.StatusOK, Message: "success", Data: &fiber.Map{"response": "Event has been deleted!"}},
+	)
+
+}

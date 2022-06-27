@@ -11,4 +11,5 @@ func EventsRoute(app *fiber.App) {
 	app.Get("/api/event/:key", controllers.GetEvent)
 	app.Get("/api/events", controllers.GetAllEvents)
 	app.Put("/api/event/:key", controllers.EditEvent)
+	app.Delete("/api/event/:key", controllers.DeleteEvent)
 }
