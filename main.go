@@ -18,5 +18,6 @@ func main() {
 	routes.MembersRoute(app)
 	routes.AdminRoute(app)
 	routes.EventsRoute(app)
+	routes.JobsRoute(app)
 	log.Fatal(app.Listen(":8000"))
 }
