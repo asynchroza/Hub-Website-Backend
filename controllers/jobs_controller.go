@@ -64,5 +64,4 @@ func CreateJob(c *fiber.Ctx) error {
 	}
 
 	return c.Status(http.StatusCreated).JSON(responses.MemberResponse{Status: http.StatusCreated, Message: "success", Data: &fiber.Map{"data": result}})
-
 }
